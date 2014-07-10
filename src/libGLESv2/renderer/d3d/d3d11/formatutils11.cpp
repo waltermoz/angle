@@ -615,7 +615,7 @@ struct D3D11FastCopyFormat
 typedef std::map<D3D11FastCopyFormat, ColorCopyFunction> D3D11FastCopyMap;
 typedef std::pair<D3D11FastCopyFormat, ColorCopyFunction> D3D11FastCopyPair;
 
-static D3D11FastCopyMap BuildFastCopyMap()
+static D3D11FastCopyMap BuildFastCopyMap11()
 {
     D3D11FastCopyMap map;
 
@@ -1025,7 +1025,7 @@ ColorReadFunction GetColorReadFunction(DXGI_FORMAT format)
 
 ColorCopyFunction GetFastCopyFunction(DXGI_FORMAT sourceFormat, GLenum destFormat, GLenum destType)
 {
-    static const D3D11FastCopyMap fastCopyMap = BuildFastCopyMap();
+    static const D3D11FastCopyMap fastCopyMap = BuildFastCopyMap11();
     D3D11FastCopyMap::const_iterator iter = fastCopyMap.find(D3D11FastCopyFormat(sourceFormat, destFormat, destType));
     return (iter != fastCopyMap.end()) ? iter->second : NULL;
 }
